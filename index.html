@@ -963,6 +963,73 @@
             border-radius: 8px;
         }
 
+        /* Work Dump Grid */
+        .work-dump-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .work-dump-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .work-dump-item.visible {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .work-dump-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--beige);
+            box-shadow: 0 12px 30px rgba(232, 220, 200, 0.2);
+        }
+
+        .work-dump-preview {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background-color: rgba(232, 220, 200, 0.05);
+        }
+
+        .work-dump-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .work-dump-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .work-dump-item:hover .work-dump-preview img {
+            transform: scale(1.05);
+        }
+
+        .work-dump-info {
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .work-dump-info h4 {
+            color: var(--white);
+            margin-bottom: calc(var(--spacing-unit) * 1);
+            font-size: 1.125rem;
+        }
+
+        .work-dump-info p {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
         /* Accessibility */
         .skip-link {
             position: absolute;
@@ -1119,7 +1186,7 @@
         <!-- Featured Case Study -->
         <section id="work">
             <div class="container">
-                <div class="section-label">Featured Case Studies</div>
+                <div class="section-label">Featured Work & Demonstrations</div>
                 <div class="featured-case">
                     <div class="featured-case-content">
                         <div class="featured-case-text">
@@ -1138,14 +1205,26 @@
                                         mozallowfullscreen="true" allowfullscreen></iframe>
                                 </div>
                             </div>
-                            <div class="featured-stats">
-                                <div class="stat">
-                                    <div class="stat-number">3</div>
-                                    <div class="stat-label">Product Lines</div>
-                                </div>
-                                <div class="stat">
-                                    <div class="stat-number">12</div>
-                                    <div class="stat-label">Month Build</div>
+                            <!-- Strategic Artifacts Grid -->
+                            <div class="embed-section" style="margin-top: 24px;">
+                                <span class="embed-label">Strategic Artifacts</span>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                                    <!-- User Journey Map -->
+                                    <div class="embed-placeholder aspect-16-9"
+                                        style="aspect-ratio: 1/1; min-height: auto;">
+                                        <span class="embed-instructions">User Journey Map<br>(Placeholder)</span>
+                                    </div>
+                                    <!-- GTM Strategy Document -->
+                                    <div class="embed-placeholder aspect-16-9"
+                                        style="aspect-ratio: 1/1; min-height: auto;">
+                                        <span class="embed-instructions">GTM Strategy Document<br>(Placeholder)</span>
+                                    </div>
+                                    <!-- Market Analysis Proof Points -->
+                                    <div class="embed-placeholder aspect-16-9"
+                                        style="aspect-ratio: 1/1; min-height: auto;">
+                                        <span class="embed-instructions">Market Analysis Proof
+                                            Points<br>(Placeholder)</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1220,11 +1299,11 @@
                             <span class="embed-label">AGENCY PORTFOLIO</span>
                             <div class="supademo-container"
                                 style="aspect-ratio: 3/4; padding: 0; min-height: auto; overflow: hidden;">
-                                <iframe src="assets/additional-work/Moose portfolio.pdf"
+                                <iframe src="assets/moose-media/Moose media portfolio.pdf"
                                     style="width: 100%; height: 100%; border: none;"></iframe>
                             </div>
                             <div style="text-align: center; margin-top: 12px;">
-                                <a href="assets/additional-work/Moose portfolio.pdf" target="_blank"
+                                <a href="assets/moose-media/Moose media portfolio.pdf" target="_blank"
                                     class="btn btn-secondary" style="font-size: 0.875rem; padding: 8px 16px;">Download
                                     PDF</a>
                             </div>
@@ -1417,40 +1496,7 @@
             </div>
         </section>
 
-        <!-- Featured Media Section -->
-        <section id="featured-media">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Featured Work &amp; Demonstrations</h2>
-                </div>
-                <div class="skills-grid">
-                    <!-- Slot 1: Robeli Platform Walkthrough -->
-                    <div class="embed-section">
-                        <span class="embed-label">Robeli Platform Walkthrough</span>
-                        <div class="embed-placeholder aspect-16-9">
-                            <span class="embed-instructions">Embed Superdemo or video walkthrough. 16:9 aspect ratio
-                                responsive.<br><!-- Place iframe or video here --></span>
-                        </div>
-                    </div>
-                    <!-- Slot 2: Marketing Strategy Framework -->
-                    <div class="embed-section">
-                        <span class="embed-label">Marketing Strategy Framework</span>
-                        <div class="embed-placeholder">
-                            <span class="embed-instructions">Embed presentation or PDF. Flexible aspect
-                                ratio.<br><!-- Place PDF viewer or embedded presentation here --></span>
-                        </div>
-                    </div>
-                    <!-- Slot 3: Customer Journey Map -->
-                    <div class="embed-section">
-                        <span class="embed-label">Customer Journey Map</span>
-                        <div class="embed-placeholder">
-                            <span class="embed-instructions">Embed interactive demo or visual. Flexible aspect
-                                ratio.<br><!-- Place visual, iframe, or interactive embed here --></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- Additional Work Section -->
         <section id="additional-work">
@@ -1588,6 +1634,54 @@
             </div>
         </section>
 
+        <!-- Work Dump Section -->
+        <section id="work-dump">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Work Dump</h2>
+                    <p style="color: var(--gray); margin-top: 16px;">Miscellaneous projects and creative experiments
+                        that don't fit neatly into categories.</p>
+                </div>
+                <div class="work-dump-grid">
+                    <!-- New Dynasty Poster -->
+                    <div class="work-dump-item">
+                        <div class="work-dump-preview">
+                            <img src="assets/work dump/new-dynasty-poster.png" alt="New Dynasty Poster">
+                        </div>
+                        <div class="work-dump-info">
+                            <h4>New Dynasty Poster</h4>
+                            <p>Brand poster design</p>
+                        </div>
+                    </div>
+
+                    <!-- TFN Catalogue Mockup -->
+                    <div class="work-dump-item">
+                        <div class="work-dump-preview">
+                            <img src="assets/work dump/TFN catalogue mockup.png" alt="TFN Catalogue Mockup">
+                        </div>
+                        <div class="work-dump-info">
+                            <h4>TFN Catalogue Mockup</h4>
+                            <p>Product catalogue design</p>
+                        </div>
+                    </div>
+
+                    <!-- The Artist Business Portfolio -->
+                    <div class="work-dump-item">
+                        <div class="work-dump-preview">
+                            <iframe src="assets/work dump/The artist business portfolio.pdf"></iframe>
+                        </div>
+                        <div class="work-dump-info">
+                            <h4>The Artist Business Portfolio</h4>
+                            <p>Creative business portfolio</p>
+                            <a href="assets/work dump/The artist business portfolio.pdf" target="_blank"
+                                style="color: var(--beige); font-size: 0.875rem; margin-top: 8px; display: inline-block;">View
+                                PDF →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact">
             <div class="container">
@@ -1689,7 +1783,7 @@
         }, observerOptions);
 
         // Observe all animated elements
-        const animatedElements = document.querySelectorAll('.value-card, .featured-case, .case-card, .skill-category, .about-text, .contact-section');
+        const animatedElements = document.querySelectorAll('.value-card, .featured-case, .case-card, .skill-category, .about-text, .contact-section, .work-dump-item');
         animatedElements.forEach(el => observer.observe(el));
 
         // Active Navigation Highlighting
