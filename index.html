@@ -39,6 +39,18 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
         }
 
         /* Typography */
@@ -255,12 +267,27 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        /* Subtle pulse for the scroll indicator */
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
             }
         }
 
@@ -338,8 +365,9 @@
         }
 
         .btn-secondary:hover {
-            background-color: var(--white);
-            color: var(--black);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+            color: var(--white);
             transform: translateY(-3px);
         }
 
@@ -1003,6 +1031,7 @@
 
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+    <canvas id="bg-canvas"></canvas>
 
     <!-- Header -->
     <header id="header">
@@ -1040,9 +1069,12 @@
                     <p class="hero-subheading">Built the products I market. Technical depth. International B2B
                         expertise.</p>
                     <div class="hero-context">
-                        <span>Built integrated LMS, HRMS, AI platforms; lived product complexity and buyer ROI</span>
-                        <span>Trained AI models, deployed infrastructure, scaled solo agency to 15-person team</span>
-                        <span>Led campaigns across European/Brazilian markets</span>
+                        <span><strong>Architected</strong> integrated LMS, HRMS, &amp; AI platforms. I don't just market
+                            complexity; I've lived it.</span>
+                        <span><strong>Scaled</strong> a solo agency to a 15-person team, training AI models and
+                            deploying infrastructure along the way.</span>
+                        <span><strong>Led</strong> high-impact B2B campaigns across European and Brazilian
+                            markets.</span>
                     </div>
                     <div class="hero-cta">
                         <a href="#work" class="btn btn-primary">Explore Work</a>
@@ -1064,18 +1096,21 @@
                 <div class="value-cards">
                     <div class="value-card">
                         <h3>Built EdTech Products</h3>
-                        <p>Developed LMS, HRMS, and AI platforms. Understand product complexity, resource constraints,
-                            and buyer ROI from lived experience, not theory.</p>
+                        <p>Developed LMS, HRMS, and AI platforms from scratch. I understand product complexity, resource
+                            constraints,
+                            and buyer ROI because I've built the systems I sell.</p>
                     </div>
                     <div class="value-card">
                         <h3>Technical + Marketing</h3>
-                        <p>Trained AI models at OpenAI. Deploy infrastructure. Execute marketing campaigns. Bridge
-                            technical and marketing teams effortlessly.</p>
+                        <p>Trained AI models at OpenAI. Deployed cloud infrastructure. Executed marketing campaigns. I
+                            bridge the gap between
+                            technical engineering and market positioning.</p>
                     </div>
                     <div class="value-card">
                         <h3>International B2B Expert</h3>
-                        <p>Led campaigns across European and Brazilian markets. Solo marketer who scaled to 15-person
-                            team. Proven cross-cultural positioning.</p>
+                        <p>Led campaigns across European and Brazilian markets. A solo marketer who scaled to a
+                            15-person
+                            team, proving cross-cultural leadership and strategic vision.</p>
                     </div>
                 </div>
             </div>
@@ -1315,21 +1350,27 @@
                         </div>
                     </div>
                     <div class="about-text">
-                        <p>Marketing strategist obsessed with EdTech and learning technologies. After 4+ years scaling
-                            marketing agencies and service businesses, invested 2025 building Robeli Institute to solve
-                            problems seen repeatedly: training institutions lack integrated technology, L&amp;D
-                            professionals need AI skills, and learning platforms ignore African markets.</p>
-                        <p>Unusual background combines marketing execution (agency co-founder, solo marketer, first hire
-                            experience), technical depth (Python, AI model training, systems architecture), and EdTech
-                            expertise (building actual learning platforms, not just marketing them). Also led
+                        <p>I am a Marketing Strategist obsessed with EdTech and learning technologies. After 4+ years
+                            scaling
+                            marketing agencies and service businesses, I dedicated 2025 to building the Robeli Institute
+                            to solve
+                            problems I saw repeatedly: training institutions lack integrated technology, L&amp;D
+                            professionals need AI skills, and learning platforms often ignore African markets.</p>
+                        <p>My background is unconventional. It combines <strong>marketing execution</strong> (agency
+                            co-founder, solo marketer), <strong>technical depth</strong> (Python, AI model training,
+                            systems architecture), and real <strong>EdTech
+                                expertise</strong> (building actual learning platforms, not just marketing them). I've
+                            also led
                             international B2B campaigns across European and Brazilian markets.</p>
-                        <p>Do not just market EdTech, but build it. This insider perspective helps craft authentic
+                        <p>I don't just market EdTech; I build it. This insider perspective helps me craft authentic
                             narratives that resonate with L&amp;D professionals, training managers, and institutional
-                            decision-makers. When writing about LMS implementation challenges or AI integration costs,
-                            speaking from lived experience, not theoretical knowledge.</p>
-                        <p>Seeking full-time Marketing Strategist role where this depth becomes exclusive focus.
-                            Learning project achieved its goal. Ready to apply insights to established EdTech or B2B
-                            SaaS company growth. No side projects, no divided attention, just dedicated marketing
+                            decision-makers. When I write about LMS implementation challenges or AI integration costs,
+                            I'm speaking from lived experience, not theoretical knowledge.</p>
+                        <p><strong>I am seeking a full-time Marketing Strategist role where this depth becomes my
+                                exclusive focus.</strong>
+                            My learning project has achieved its goal. I am ready to apply these insights to drive
+                            growth for an established EdTech or B2B
+                            SaaS company. No side projects, no divided attention—just dedicated marketing
                             excellence.</p>
                         <div class="about-details">
                             <div class="detail-item">
@@ -1735,6 +1776,144 @@
                 imageObserver.observe(img);
             });
         }
+
+        // Background Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // Configuration
+        const particleCount = 60; // Number of particles
+        const connectionDistance = 150; // Distance to connect particles
+        const mouseDistance = 200; // Distance for mouse interaction
+
+        // Mouse position
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Resize handling
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Particle Class
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; // Velocity X
+                this.vy = (Math.random() - 0.5) * 0.5; // Velocity Y
+                this.size = Math.random() * 1.5 + 0.5;
+                // Randomly assign colors based on palette
+                const colors = ['rgba(184, 184, 184, 0.3)', 'rgba(232, 220, 200, 0.3)']; // Gray and Beige
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Mouse interaction
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 0.5;
+                        const directionY = forceDirectionY * force * 0.5;
+
+                        // Gentle push away or pull towards? Let's do a subtle pull for "connection"
+                        // Or push for "disturbance". Let's do push for a ripple effect.
+                        this.vx -= directionX * 0.05;
+                        this.vy -= directionY * 0.05;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        initParticles();
+
+        // Animation Loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(184, 184, 184, ${0.1 - distance / connectionDistance * 0.1})`; // Fade out
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Draw connection to mouse
+                if (mouse.x != null) {
+                    let dx = particles[i].x - mouse.x;
+                    let dy = particles[i].y - mouse.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouseDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(232, 220, 200, ${0.15 - distance / mouseDistance * 0.15})`; // Beige accent for mouse
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 </body>
 
