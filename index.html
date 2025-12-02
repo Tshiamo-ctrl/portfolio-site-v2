@@ -967,7 +967,7 @@
         /* Hero Section Redesign */
         .hero {
             position: relative;
-            padding: calc(var(--spacing-unit) * 12) 0 calc(var(--spacing-unit) * 8);
+            padding: calc(var(--spacing-unit) * 6) 0 calc(var(--spacing-unit) * 4);
             min-height: 90vh;
             display: flex;
             align-items: center;
@@ -977,7 +977,7 @@
         .hero-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: calc(var(--spacing-unit) * 6);
+            gap: calc(var(--spacing-unit) * 4);
             align-items: center;
         }
 
@@ -991,19 +991,20 @@
         .hero-image-container {
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 320px;
+            /* Reduced size */
             aspect-ratio: 4/5;
             margin-left: auto;
             border-radius: 24px;
             overflow: hidden;
             border: 2px solid var(--beige);
             box-shadow: 0 20px 40px rgba(232, 220, 200, 0.1);
-            transform: rotate(2deg);
+            /* Removed rotation */
             transition: var(--transition-smooth);
         }
 
         .hero-image-container:hover {
-            transform: rotate(0deg) scale(1.02);
+            transform: scale(1.02);
             box-shadow: 0 30px 60px rgba(232, 220, 200, 0.2);
         }
 
@@ -1019,7 +1020,7 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
             color: var(--beige);
-            margin-bottom: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
             display: inline-block;
             border: 1px solid var(--beige);
             padding: 8px 16px;
@@ -1027,9 +1028,9 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             line-height: 1.1;
-            margin-bottom: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 2);
             background: linear-gradient(to right, #ffffff, #e8dcc8);
             background-clip: text;
             -webkit-background-clip: text;
@@ -1039,7 +1040,7 @@
         .hero-subheading {
             font-size: 1.25rem;
             color: var(--gray);
-            margin-bottom: calc(var(--spacing-unit) * 4);
+            margin-bottom: calc(var(--spacing-unit) * 3);
             max-width: 600px;
             line-height: 1.6;
         }
@@ -1047,8 +1048,8 @@
         .hero-context {
             display: flex;
             flex-direction: column;
-            gap: calc(var(--spacing-unit) * 2);
-            margin-bottom: calc(var(--spacing-unit) * 5);
+            gap: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: calc(var(--spacing-unit) * 3);
             border-left: 2px solid var(--beige);
             padding-left: calc(var(--spacing-unit) * 3);
         }
@@ -1067,7 +1068,7 @@
             gap: calc(var(--spacing-unit) * 2);
             justify-content: center;
             /* Center align buttons */
-            margin-top: calc(var(--spacing-unit) * 4);
+            margin-top: calc(var(--spacing-unit) * 3);
         }
 
         @media (max-width: 992px) {
@@ -1560,7 +1561,6 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-content">
-                        <div class="hero-tagline">TSHIAMO MILGRAND MASULUKE</div>
                         <h1>Marketing Strategist for EdTech &amp; B2B SaaS</h1>
                         <p class="hero-subheading">Built the products I market. Technical depth. International B2B
                             expertise.</p>
