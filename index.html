@@ -879,6 +879,139 @@
             }
         }
 
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--spacing-unit) * 4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-content video {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-content iframe {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 10px;
+            line-height: 1;
+            transition: var(--transition-smooth);
+        }
+
+        .lightbox-close:hover {
+            color: var(--beige);
+            transform: rotate(90deg);
+        }
+
+        /* Clickable grid images */
+        .grid-image-clickable {
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .grid-image-clickable:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* Collapsible Card Sections */
+        .embed-section.collapsed {
+            display: none;
+        }
+
+        .expand-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 1);
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            background-color: rgba(232, 220, 200, 0.1);
+            border: 1px solid var(--beige);
+            border-radius: 8px;
+            color: var(--beige);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .expand-toggle:hover {
+            background-color: rgba(232, 220, 200, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .expand-toggle svg {
+            transition: transform 0.3s ease;
+        }
+
+        .expand-toggle.expanded svg {
+            transform: rotate(180deg);
+        }
+
         /* Embed Sections */
         .embed-section {
             background-color: var(--card-bg);
@@ -1287,7 +1420,7 @@
 
                 <!-- Case Studies Grid -->
                 <div class="section-title">
-                    <h2>Case Studies</h2>
+                    <h2>Additional work</h2>
                 </div>
                 <div class="case-studies-grid">
                     <!-- Moose Media -->
@@ -1359,6 +1492,112 @@
                             <span class="tag">Google Ads</span>
                             <span class="tag">Social Media</span>
                             <span class="tag">International B2B</span>
+                        </div>
+                    </div>
+
+                    <!-- Mvela Mushrooms -->
+                    <div class="case-card">
+                        <h4>Mvela Mushrooms</h4>
+                        <div class="case-card-subtitle">MARKET ANALYSIS & BRANDING</div>
+                        <p>Comprehensive market opportunity and competitor analysis, accompanied by a complete visual
+                            brand guide.</p>
+                        <!-- Embed: Brand Guide PDF -->
+                        <div class="embed-section">
+                            <span class="embed-label">Visual Brand Guide</span>
+                            <div class="supademo-container"
+                                style="aspect-ratio: 3/4; padding: 0; min-height: auto; overflow: hidden;">
+                                <iframe src="assets/mvela-mushrooms/mvela-mushrooms-brand-guide.pdf"
+                                    style="width: 100%; height: 100%; border: none;"></iframe>
+                            </div>
+                            <div style="text-align: center; margin-top: 12px;">
+                                <a href="assets/mvela-mushrooms/mvela-mushrooms-brand-guide.pdf" target="_blank"
+                                    class="btn btn-secondary" style="font-size: 0.875rem; padding: 8px 16px;">Download
+                                    PDF</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Adventure Labs -->
+                    <div class="case-card">
+                        <h4>Adventure Labs</h4>
+                        <div class="case-card-subtitle">PROPOSAL &amp; BRAND COLLATERAL</div>
+                        <p>Strategic proposal and brand collateral design, including custom t-shirt designs.</p>
+                        <!-- Embed: Main Image/Screenshot -->
+                        <div class="embed-section">
+                            <span class="embed-label">Project Preview</span>
+                            <div class="supademo-container"
+                                style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
+                                <img src="assets/adventure-labs/adventure-labs-preview.png" alt="Adventure Labs Preview"
+                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                            </div>
+                        </div>
+                        <!-- Embed: T-Shirt Mockup Video -->
+                        <div class="embed-section" style="margin-top: 24px;">
+                            <span class="embed-label">T-Shirt Mockup</span>
+                            <div class="supademo-container"
+                                style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
+                                <video controls
+                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                    <source src="assets/adventure-labs/AL shirt mockup unanimated better-Camera.mp4"
+                                        type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="case-cta" style="margin-top: 16px;">
+                            <a href="https://tshiamo-ctrl.github.io/adventure-labs-proposal/" target="_blank"
+                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
+                                View Proposal (GitHub)
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Lifeway Church -->
+                    <div class="case-card">
+                        <h4>Lifeway Church</h4>
+                        <div class="case-card-subtitle">STRATEGY &amp; IMPLEMENTATION</div>
+                        <p>Digital strategy proposal and n8n automation implementation.</p>
+                        <!-- Embed: Main Image/Screenshot -->
+                        <div class="embed-section">
+                            <span class="embed-label">Strategy Preview</span>
+                            <div class="supademo-container"
+                                style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
+                                <img src="assets/lifeway-church/lifeway-church-preview.png"
+                                    alt="Lifeway Church Strategy Preview"
+                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                            </div>
+                        </div>
+                        <div class="case-cta"
+                            style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+                            <a href="https://tshiamo-ctrl.github.io/Lifeway-Protection-Plan/" target="_blank"
+                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
+                                View Proposal (GitHub Pages)
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/Tshiamo-ctrl/n8n-deployment" target="_blank"
+                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
+                                View Implementation (n8n GitHub)
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                    </path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
 
@@ -1500,122 +1739,6 @@
 
 
 
-        <!-- Additional Work Section -->
-        <section id="additional-work">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Additional Work</h2>
-                </div>
-                <div class="case-studies-grid">
-                    <!-- Mvela Mushrooms -->
-                    <div class="case-card">
-                        <h4>Mvela Mushrooms</h4>
-                        <div class="case-card-subtitle">MARKET ANALYSIS & BRANDING</div>
-                        <p>Comprehensive market opportunity and competitor analysis, accompanied by a complete visual
-                            brand guide.</p>
-                        <!-- Embed: Brand Guide PDF -->
-                        <div class="embed-section">
-                            <span class="embed-label">Visual Brand Guide</span>
-                            <div class="supademo-container"
-                                style="aspect-ratio: 3/4; padding: 0; min-height: auto; overflow: hidden;">
-                                <iframe src="assets/mvela-mushrooms/mvela-mushrooms-brand-guide.pdf"
-                                    style="width: 100%; height: 100%; border: none;"></iframe>
-                            </div>
-                            <div style="text-align: center; margin-top: 12px;">
-                                <a href="assets/mvela-mushrooms/mvela-mushrooms-brand-guide.pdf" target="_blank"
-                                    class="btn btn-secondary" style="font-size: 0.875rem; padding: 8px 16px;">Download
-                                    PDF</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Adventure Labs -->
-                    <div class="case-card">
-                        <h4>Adventure Labs</h4>
-                        <div class="case-card-subtitle">PROPOSAL &amp; BRAND COLLATERAL</div>
-                        <p>Strategic proposal and brand collateral design, including custom t-shirt designs.</p>
-                        <!-- Embed: Main Image/Screenshot -->
-                        <div class="embed-section">
-                            <span class="embed-label">Project Preview</span>
-                            <div class="supademo-container"
-                                style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
-                                <img src="assets/adventure-labs/adventure-labs-preview.png" alt="Adventure Labs Preview"
-                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                            </div>
-                        </div>
-                        <!-- Embed: T-Shirt Mockup Video -->
-                        <div class="embed-section" style="margin-top: 24px;">
-                            <span class="embed-label">T-Shirt Mockup</span>
-                            <div class="supademo-container"
-                                style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
-                                <video controls
-                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                                    <source src="assets/adventure-labs/AL shirt mockup unanimated better-Camera.mp4"
-                                        type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                        <div class="case-cta" style="margin-top: 16px;">
-                            <a href="https://tshiamo-ctrl.github.io/adventure-labs-proposal/" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
-                                View Proposal (GitHub)
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-
-
-
-                    <!-- Lifeway Church -->
-                    <div class="case-card">
-                        <h4>Lifeway Church</h4>
-                        <div class="case-card-subtitle">STRATEGY &amp; IMPLEMENTATION</div>
-                        <p>Digital strategy proposal and n8n automation implementation.</p>
-                        <!-- Embed: Main Image/Screenshot -->
-                        <div class="embed-section">
-                            <span class="embed-label">Strategy Preview</span>
-                            <div class="supademo-container"
-                                style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
-                                <img src="assets/lifeway-church/lifeway-church-preview.png"
-                                    alt="Lifeway Church Strategy Preview"
-                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                            </div>
-                        </div>
-                        <div class="case-cta"
-                            style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
-                            <a href="https://tshiamo-ctrl.github.io/Lifeway-Protection-Plan/" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
-                                View Proposal (GitHub Pages)
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                            </a>
-                            <a href="https://github.com/Tshiamo-ctrl/n8n-deployment" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
-                                View Implementation (n8n GitHub)
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                    </path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Work Dump Section -->
         <section id="work-dump">
             <div class="container">
@@ -1625,7 +1748,7 @@
                         that don't fit neatly into categories.</p>
                 </div>
                 <div class="work-dump-grid">
-                    <!-- New Dynasty Poster -->
+                    <!-- Dynasty Pagent Poster -->
                     <div class="work-dump-item">
                         <div class="work-dump-preview">
                             <img src="assets/work dump/new-dynasty-poster.png" alt="New Dynasty Poster">
@@ -1725,7 +1848,194 @@
         </div>
     </footer>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightbox-img" src="" alt="Full size image" style="display: none;">
+            <video id="lightbox-video" controls style="display: none;">
+                <source id="lightbox-video-source" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <iframe id="lightbox-pdf" src=""
+                style="display: none; width: 90vw; height: 90vh; border: none; border-radius: 8px;"></iframe>
+        </div>
+    </div>
+
     <script>
+        // Lightbox Functions
+        function openLightbox(mediaElement, mediaType) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxVideo = document.getElementById('lightbox-video');
+            const lightboxVideoSource = document.getElementById('lightbox-video-source');
+            const lightboxPdf = document.getElementById('lightbox-pdf');
+
+            // Hide all media elements first
+            lightboxImg.style.display = 'none';
+            lightboxVideo.style.display = 'none';
+            lightboxPdf.style.display = 'none';
+
+            // Show and set the appropriate media element
+            if (mediaType === 'image') {
+                lightboxImg.src = mediaElement.src;
+                lightboxImg.style.display = 'block';
+            } else if (mediaType === 'video') {
+                lightboxVideoSource.src = mediaElement.querySelector('source').src;
+                lightboxVideo.load();
+                lightboxVideo.style.display = 'block';
+            } else if (mediaType === 'pdf') {
+                lightboxPdf.src = mediaElement.src;
+                lightboxPdf.style.display = 'block';
+            }
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxVideo = document.getElementById('lightbox-video');
+            const lightboxPdf = document.getElementById('lightbox-pdf');
+
+            // Pause video if playing
+            if (lightboxVideo.style.display === 'block') {
+                lightboxVideo.pause();
+            }
+
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Make all media clickable (images, videos, PDFs) except supademo embeds
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle Images
+            const allImages = document.querySelectorAll('img');
+            allImages.forEach(img => {
+                // Skip if it's a profile image or in navigation
+                const skipClasses = ['lightbox-img'];
+                if (skipClasses.some(cls => img.id === cls)) return;
+
+                // Add clickable functionality
+                img.classList.add('grid-image-clickable');
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openLightbox(this, 'image');
+                });
+            });
+
+            // Handle Videos
+            const allVideos = document.querySelectorAll('video');
+            allVideos.forEach(video => {
+                // Skip lightbox video
+                if (video.id === 'lightbox-video') return;
+
+                // Add clickable functionality
+                video.style.cursor = 'pointer';
+                video.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    this.pause(); // Pause the original video
+                    openLightbox(this, 'video');
+                });
+            });
+
+            // Handle PDFs (iframes)
+            const allIframes = document.querySelectorAll('iframe');
+            allIframes.forEach(iframe => {
+                // Skip supademo embeds and lightbox iframe
+                const src = iframe.src || iframe.getAttribute('src') || '';
+                if (src.includes('supademo.com') || iframe.id === 'lightbox-pdf') return;
+
+                // Check if it's a PDF
+                if (src.toLowerCase().includes('.pdf')) {
+                    // Wrap iframe in a clickable container if not already
+                    const parent = iframe.parentElement;
+                    parent.style.cursor = 'pointer';
+                    parent.addEventListener('click', function (e) {
+                        // Only trigger if clicking on the iframe area, not other elements
+                        if (e.target === iframe || e.target === parent) {
+                            e.preventDefault();
+                            openLightbox(iframe, 'pdf');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Collapsible Card Functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find all case cards
+            const caseCards = document.querySelectorAll('.case-card, .featured-case');
+
+            caseCards.forEach(card => {
+                // Find all embed sections within this card
+                const embedSections = card.querySelectorAll('.embed-section');
+
+                // Only add collapse functionality if there are 2+ embed sections
+                if (embedSections.length > 1) {
+                    // Hide all embed sections except the first one
+                    embedSections.forEach((section, index) => {
+                        if (index > 0) {
+                            section.classList.add('collapsed');
+                        }
+                    });
+
+                    // Create expand/collapse button
+                    const toggleButton = document.createElement('button');
+                    toggleButton.className = 'expand-toggle';
+                    toggleButton.innerHTML = `
+                        <span class="toggle-text">Show More</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    `;
+
+                    // Add click handler
+                    toggleButton.addEventListener('click', function () {
+                        const isExpanded = this.classList.contains('expanded');
+
+                        if (isExpanded) {
+                            // Collapse
+                            embedSections.forEach((section, index) => {
+                                if (index > 0) {
+                                    section.classList.add('collapsed');
+                                }
+                            });
+                            this.classList.remove('expanded');
+                            this.querySelector('.toggle-text').textContent = 'Show More';
+                        } else {
+                            // Expand
+                            embedSections.forEach((section, index) => {
+                                if (index > 0) {
+                                    section.classList.remove('collapsed');
+                                }
+                            });
+                            this.classList.add('expanded');
+                            this.querySelector('.toggle-text').textContent = 'Show Less';
+                        }
+                    });
+
+                    // Insert button after the first embed section
+                    embedSections[0].insertAdjacentElement('afterend', toggleButton);
+                }
+            });
+        });
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileNav = document.getElementById('mobile-nav');
