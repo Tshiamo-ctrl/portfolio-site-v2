@@ -879,25 +879,228 @@
             }
         }
 
-        /* Lightbox Modal */
+        /* Lightbox Styles */
         .lightbox {
             display: none;
             position: fixed;
-            z-index: 2000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+            /* Allow scrolling */
+            padding: 20px;
         }
 
         .lightbox.active {
             display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-content video {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-content iframe {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: fixed;
+            /* Fixed position to stay visible */
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: calc(var(--spacing-unit) * 4);
+            transition: var(--transition-smooth);
+            z-index: 1001;
+        }
+
+        .lightbox-close:hover {
+            background: var(--beige);
+            color: var(--black);
+            transform: rotate(90deg);
+        }
+
+        /* Hero Section Redesign */
+        .hero {
+            position: relative;
+            padding: calc(var(--spacing-unit) * 12) 0 calc(var(--spacing-unit) * 8);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: calc(var(--spacing-unit) * 6);
+            align-items: center;
+        }
+
+        .hero-content {
+            text-align: left;
+            /* Left align text */
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4/5;
+            margin-left: auto;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 2px solid var(--beige);
+            box-shadow: 0 20px 40px rgba(232, 220, 200, 0.1);
+            transform: rotate(2deg);
+            transition: var(--transition-smooth);
+        }
+
+        .hero-image-container:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 0 30px 60px rgba(232, 220, 200, 0.2);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-tagline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--beige);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            display: inline-block;
+            border: 1px solid var(--beige);
+            padding: 8px 16px;
+            border-radius: 50px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            background: linear-gradient(to right, #ffffff, #e8dcc8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subheading {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .hero-context {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 5);
+            border-left: 2px solid var(--beige);
+            padding-left: calc(var(--spacing-unit) * 3);
+        }
+
+        .hero-context span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .hero-context strong {
+            color: var(--white);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            justify-content: center;
+            /* Center align buttons */
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: calc(var(--spacing-unit) * 4);
+            }
+
+            .hero-content {
+                text-align: center;
+                order: 2;
+            }
+
+            .hero-image-container {
+                margin: 0 auto;
+                max-width: 300px;
+                order: 1;
+                transform: rotate(0deg);
+            }
+
+            .hero-context {
+                border-left: none;
+                border-top: 2px solid var(--beige);
+                padding-left: 0;
+                padding-top: calc(var(--spacing-unit) * 3);
+                align-items: center;
+            }
+
+            .hero-subheading {
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
         @keyframes fadeIn {
@@ -1020,6 +1223,98 @@
             padding: calc(var(--spacing-unit) * 4);
             margin: calc(var(--spacing-unit) * 4) 0;
             position: relative;
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 10, 10, 0.7);
+            color: var(--white);
+            border: 1px solid var(--beige);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition-smooth);
+        }
+
+        .carousel-btn:hover {
+            background: var(--beige);
+            color: var(--black);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .carousel-dot.active {
+            background: var(--beige);
+            transform: scale(1.2);
+        }
+
+        /* Specific Section Adjustments */
+        #value {
+            padding: calc(var(--spacing-unit) * 6) 0;
+            /* Reduced from default 12 */
+        }
+
+        #value .value-cards {
+            margin-bottom: 0;
         }
 
         .embed-label {
@@ -1263,22 +1558,29 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <div class="hero-content">
-                    <div class="hero-tagline">TSHIAMO MILGRAND MASULUKE</div>
-                    <h1>Marketing Strategist for EdTech &amp; B2B SaaS</h1>
-                    <p class="hero-subheading">Built the products I market. Technical depth. International B2B
-                        expertise.</p>
-                    <div class="hero-context">
-                        <span><strong>Architected</strong> integrated LMS, HRMS, &amp; AI platforms. I don't just market
-                            complexity; I've lived it.</span>
-                        <span><strong>Scaled</strong> a solo agency to a 15-person team, training AI models and
-                            deploying infrastructure along the way.</span>
-                        <span><strong>Led</strong> high-impact B2B campaigns across European and Brazilian
-                            markets.</span>
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <div class="hero-tagline">TSHIAMO MILGRAND MASULUKE</div>
+                        <h1>Marketing Strategist for EdTech &amp; B2B SaaS</h1>
+                        <p class="hero-subheading">Built the products I market. Technical depth. International B2B
+                            expertise.</p>
+                        <div class="hero-context">
+                            <span><strong>Architected</strong> integrated LMS, HRMS, &amp; AI platforms. I don't just
+                                market
+                                complexity; I've lived it.</span>
+                            <span><strong>Scaled</strong> a solo agency to a 15-person team, training AI models and
+                                deploying infrastructure along the way.</span>
+                            <span><strong>Led</strong> high-impact B2B campaigns across European and Brazilian
+                                markets.</span>
+                        </div>
+                        <div class="hero-cta">
+                            <a href="#work" class="btn btn-primary">Explore Work</a>
+                            <button class="btn btn-secondary" onclick="window.open('#', '_blank')">Download
+                                Resume</button>
+                        </div>
                     </div>
-                    <div class="hero-cta">
-                        <a href="#work" class="btn btn-primary">Explore Work</a>
-                        <button class="btn btn-secondary" onclick="window.open('#', '_blank')">Download Resume</button>
+                    <div class="hero-image-container">
+                        <img src="assets/images/profile/me.jpg" alt="Tshiamo Milgrand Masuluke">
                     </div>
                 </div>
             </div>
@@ -1458,19 +1760,32 @@
                         <!-- EMBED SECTION: CAMPAIGN DESIGN PROOF POINTS -->
                         <div class="embed-section">
                             <span class="embed-label">CAMPAIGN DESIGN PROOF POINTS</span>
-                            <div
-                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                                <!-- Skotial Selfie Ad -->
-                                <div class="supademo-container"
-                                    style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
-                                    <img src="assets/skotial/Skotial selfie ad.gif" alt="Skotial Selfie Ad Campaign"
-                                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                            <div class="carousel-container" id="skotial-carousel">
+                                <div class="carousel-track">
+                                    <div class="carousel-slide">
+                                        <img src="assets/skotial/Skotial selfie ad.gif"
+                                            alt="Skotial Selfie Ad Campaign">
+                                    </div>
+                                    <div class="carousel-slide">
+                                        <img src="assets/skotial/Skotial shopping ad.gif"
+                                            alt="Skotial Shopping Ad Campaign">
+                                    </div>
                                 </div>
-                                <!-- Skotial Shopping Ad -->
-                                <div class="supademo-container"
-                                    style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
-                                    <img src="assets/skotial/Skotial shopping ad.gif" alt="Skotial Shopping Ad Campaign"
-                                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                <button class="carousel-btn prev" aria-label="Previous slide">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+                                </button>
+                                <button class="carousel-btn next" aria-label="Next slide">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="carousel-dots">
+                                    <div class="carousel-dot active" data-index="0"></div>
+                                    <div class="carousel-dot" data-index="1"></div>
                                 </div>
                             </div>
                         </div>
@@ -1499,105 +1814,85 @@
                     <div class="case-card">
                         <h4>Mvela Mushrooms</h4>
                         <div class="case-card-subtitle">MARKET ANALYSIS & BRANDING</div>
-                        <p>Comprehensive market opportunity and competitor analysis, accompanied by a complete visual
-                            brand guide.</p>
-                        <!-- Embed: Brand Guide PDF -->
+                        <p>Developed comprehensive market entry strategy and visual identity for an agricultural
+                            startup. Created investor-ready documentation.</p>
+                        <!-- EMBED SECTION: BRAND GUIDE -->
                         <div class="embed-section">
-                            <span class="embed-label">Visual Brand Guide</span>
+                            <span class="embed-label">VISUAL BRAND GUIDE</span>
                             <div class="supademo-container"
                                 style="aspect-ratio: 3/4; padding: 0; min-height: auto; overflow: hidden;">
-                                <iframe src="assets/mvela-mushrooms/mvela-mushrooms-brand-guide.pdf"
+                                <iframe src="assets/mvela-mushrooms/Mvela Mushrooms Brand Guide.pdf"
                                     style="width: 100%; height: 100%; border: none;"></iframe>
                             </div>
                             <div style="text-align: center; margin-top: 12px;">
-                                <a href="assets/mvela-mushrooms/mvela-mushrooms-brand-guide.pdf" target="_blank"
+                                <a href="assets/mvela-mushrooms/Mvela Mushrooms Brand Guide.pdf" target="_blank"
                                     class="btn btn-secondary" style="font-size: 0.875rem; padding: 8px 16px;">Download
                                     PDF</a>
                             </div>
+                        </div>
+                        <div class="case-tags">
+                            <span class="tag">Brand Strategy</span>
+                            <span class="tag">Market Research</span>
+                            <span class="tag">Visual Identity</span>
                         </div>
                     </div>
 
                     <!-- Adventure Labs -->
                     <div class="case-card">
                         <h4>Adventure Labs</h4>
-                        <div class="case-card-subtitle">PROPOSAL &amp; BRAND COLLATERAL</div>
-                        <p>Strategic proposal and brand collateral design, including custom t-shirt designs.</p>
-                        <!-- Embed: Main Image/Screenshot -->
+                        <div class="case-card-subtitle">PROPOSAL & BRAND COLLATERAL</div>
+                        <p>Designed high-converting proposal documents and merchandise mockups for an adventure tourism
+                            company.</p>
+                        <!-- EMBED SECTION: PROPOSAL PREVIEW -->
                         <div class="embed-section">
-                            <span class="embed-label">Project Preview</span>
+                            <span class="embed-label">PROPOSAL DOCUMENT PREVIEW</span>
                             <div class="supademo-container"
                                 style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
-                                <img src="assets/adventure-labs/adventure-labs-preview.png" alt="Adventure Labs Preview"
+                                <img src="assets/adventure-labs/Adventure Labs Proposal preview.png"
+                                    alt="Adventure Labs Proposal Preview"
                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                             </div>
                         </div>
-                        <!-- Embed: T-Shirt Mockup Video -->
+                        <!-- EMBED SECTION: T-SHIRT MOCKUP -->
                         <div class="embed-section" style="margin-top: 24px;">
-                            <span class="embed-label">T-Shirt Mockup</span>
+                            <span class="embed-label">MERCHANDISE MOCKUP</span>
                             <div class="supademo-container"
-                                style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
+                                style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
                                 <video controls
                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                                    <source src="assets/adventure-labs/AL shirt mockup unanimated better-Camera.mp4"
+                                    <source src="assets/adventure-labs/Adventure Labs T-shirt mockup.mp4"
                                         type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
                         </div>
-                        <div class="case-cta" style="margin-top: 16px;">
-                            <a href="https://tshiamo-ctrl.github.io/adventure-labs-proposal/" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
-                                View Proposal (GitHub)
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                            </a>
+                        <div class="case-tags">
+                            <span class="tag">Proposal Design</span>
+                            <span class="tag">Merchandise</span>
+                            <span class="tag">Sales Collateral</span>
                         </div>
                     </div>
-
-
-
 
                     <!-- Lifeway Church -->
                     <div class="case-card">
                         <h4>Lifeway Church</h4>
-                        <div class="case-card-subtitle">STRATEGY &amp; IMPLEMENTATION</div>
-                        <p>Digital strategy proposal and n8n automation implementation.</p>
-                        <!-- Embed: Main Image/Screenshot -->
+                        <div class="case-card-subtitle">STRATEGY & IMPLEMENTATION</div>
+                        <p>Led digital transformation and communication strategy for a community organization. Improved
+                            engagement and outreach.</p>
+                        <!-- EMBED SECTION: STRATEGY DOCUMENT -->
                         <div class="embed-section">
-                            <span class="embed-label">Strategy Preview</span>
+                            <span class="embed-label">COMMUNICATION STRATEGY</span>
                             <div class="supademo-container"
                                 style="aspect-ratio: 16/9; padding: 0; min-height: auto; overflow: hidden;">
-                                <img src="assets/lifeway-church/lifeway-church-preview.png"
-                                    alt="Lifeway Church Strategy Preview"
+                                <img src="assets/lifeway-church/Lifeway Church Strategy.png"
+                                    alt="Lifeway Church Strategy Document"
                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                             </div>
                         </div>
-                        <div class="case-cta"
-                            style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
-                            <a href="https://tshiamo-ctrl.github.io/Lifeway-Protection-Plan/" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
-                                View Proposal (GitHub Pages)
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                            </a>
-                            <a href="https://github.com/Tshiamo-ctrl/n8n-deployment" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 8px; color: var(--beige);">
-                                View Implementation (n8n GitHub)
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                    </path>
-                                </svg>
-                            </a>
+                        <div class="case-tags">
+                            <span class="tag">Digital Strategy</span>
+                            <span class="tag">Community Management</span>
+                            <span class="tag">Communication</span>
                         </div>
                     </div>
 
@@ -1645,13 +1940,13 @@
                     <div class="skill-category">
                         <h4>Strategy &amp; Leadership</h4>
                         <div class="skill-tags">
-                            <span class="skill-tag">Multi-Product Marketing</span>
-                            <span class="skill-tag">International B2B</span>
-                            <span class="skill-tag">Solo Marketer Experience</span>
-                            <span class="skill-tag">Team Leadership (15 people)</span>
-                            <span class="skill-tag">Agency Operations</span>
-                            <span class="skill-tag">Strategic Consulting</span>
-                            <span class="skill-tag">ROI-Driven Decision Making</span>
+                            <span class="tag">Multi-Product Marketing</span>
+                            <span class="tag">International B2B</span>
+                            <span class="tag">Solo Marketer Experience</span>
+                            <span class="tag">Team Leadership (15 people)</span>
+                            <span class="tag">Agency Operations</span>
+                            <span class="tag">Strategic Consulting</span>
+                            <span class="tag">ROI-Driven Decision Making</span>
                         </div>
                     </div>
                 </div>
@@ -1665,15 +1960,6 @@
                     <h2>About Tshiamo Milgrand Masuluke</h2>
                 </div>
                 <div class="about-content">
-                    <!-- PROFESSIONAL HEADSHOT EMBED SECTION -->
-                    <div class="embed-section" style="max-width: 420px; margin-bottom: 32px;">
-                        <span class="embed-label">PROFESSIONAL HEADSHOT</span>
-                        <div class="supademo-container"
-                            style="aspect-ratio: 4/5; padding: 0; min-height: auto; overflow: hidden; width: 100%;">
-                            <img src="assets/images/profile/me.jpg" alt="Tshiamo Milgrand Masuluke"
-                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                        </div>
-                    </div>
                     <div class="about-text">
                         <p>I am a Marketing Strategist obsessed with EdTech and learning technologies. After 4+ years
                             scaling
@@ -2299,6 +2585,68 @@
         }
 
         animate();
+
+        // Carousel Functionality
+        function initCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            const track = carousel.querySelector('.carousel-track');
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const nextBtn = carousel.querySelector('.carousel-btn.next');
+            const prevBtn = carousel.querySelector('.carousel-btn.prev');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+
+            let currentIndex = 0;
+            const slideCount = slides.length;
+
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent bubbling
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateCarousel();
+            });
+
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent bubbling
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateCarousel();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent bubbling
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+
+            // Allow clicking images to open lightbox (using existing lightbox logic)
+            slides.forEach(slide => {
+                const img = slide.querySelector('img');
+                if (img) {
+                    img.style.cursor = 'pointer';
+                    img.addEventListener('click', () => {
+                        if (typeof openLightbox === 'function') {
+                            openLightbox(img, 'image');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Initialize Skotial Carousel
+        document.addEventListener('DOMContentLoaded', () => {
+            initCarousel('skotial-carousel');
+        });
     </script>
 </body>
 
