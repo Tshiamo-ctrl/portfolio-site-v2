@@ -1728,8 +1728,7 @@
                                             <div class="carousel-track">
                                                 <div class="carousel-slide">
                                                     <div style="width: 100%; height: 100%; position: relative;">
-                                                        <iframe
-                                                            src="assets/Robeli/robeli-marketing-strategy.pdf"
+                                                        <iframe src="assets/Robeli/robeli-marketing-strategy.pdf"
                                                             style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe>
                                                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;"
                                                             onclick="openLightbox(this.previousElementSibling, 'pdf')">
@@ -1851,7 +1850,8 @@
                                             style="aspect-ratio: 1/1;">
                                             <div class="carousel-track">
                                                 <div class="carousel-slide">
-                                                        <video controls poster="assets/legacy-builders/Legacy Builders React site thumbnail.png"
+                                                    <video controls
+                                                        poster="assets/legacy-builders/Legacy Builders React site thumbnail.png"
                                                         style="width: 100%; height: 100%; object-fit: cover;">
                                                         <source
                                                             src="assets/legacy-builders/Legacy Builders initial lead capture (react and formspree).mp4"
@@ -1897,7 +1897,9 @@
                                     <div style="display: flex; flex-direction: column; gap: 12px;">
                                         <div class="supademo-container"
                                             style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
-                                            <video controls poster="assets/legacy-builders/branding/Legacy Builders Teaser vidoe thumbnail.png" style="width: 100%; height: 100%; object-fit: cover;">
+                                            <video controls
+                                                poster="assets/legacy-builders/branding/Legacy Builders Teaser vidoe thumbnail.png"
+                                                style="width: 100%; height: 100%; object-fit: cover;">
                                                 <source
                                                     src="assets/legacy-builders/branding/Legacy Builders Teaser Video 720p.mp4"
                                                     type="video/mp4">
@@ -1929,7 +1931,7 @@
                         <div class="embed-section">
                             <span class="embed-label">AGENCY PORTFOLIO</span>
                             <div class="supademo-container"
-                                style="aspect-ratio: 3/4; padding: 0; min-height: auto; overflow: hidden;">
+                                style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
                                 <iframe src="assets/moose-media/moose-media-portfolio.pdf"
                                     style="width: 100%; height: 100%; border: none;"></iframe>
                             </div>
@@ -1992,8 +1994,8 @@
                                     style="width: 100%; height: 100%; border: none;"></iframe>
                             </div>
                             <div style="text-align: center; margin-top: 12px;">
-                                <a href="assets/skotial/skotial-shoprite-brochure.pdf" target="_blank" class="btn btn-secondary"
-                                    style="font-size: 0.875rem; padding: 8px 16px;">Download
+                                <a href="assets/skotial/skotial-shoprite-brochure.pdf" target="_blank"
+                                    class="btn btn-secondary" style="font-size: 0.875rem; padding: 8px 16px;">Download
                                     PDF</a>
                             </div>
                         </div>
@@ -2026,7 +2028,9 @@
                         <p>Conducted comprehensive market opportunity assessment and threat scan. Developed visual
                             identity and investor-ready documentation for agricultural startup.</p>
                         <!-- EMBED SECTION: STRATEGIC ARTIFACTS -->
-                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 24px;">
+                        <!-- EMBED SECTION: STRATEGIC ARTIFACTS -->
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 24px;">
                             <!-- Brand Guide -->
                             <div class="embed-section" style="margin: 0;">
                                 <span class="embed-label">BRAND GUIDE</span>
@@ -2042,35 +2046,68 @@
                                 </div>
                             </div>
 
-                            <!-- Market Opportunity Assessment -->
+                            <!-- Strategy Carousel (Market Assessment & Threat Scan) -->
                             <div class="embed-section" style="margin: 0;">
-                                <span class="embed-label">MARKET ASSESSMENT</span>
-                                <div class="supademo-container"
-                                    style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
-                                    <iframe
-                                        src="assets/mvela-mushrooms/mvela-market-opportunity.pdf"
-                                        style="width: 100%; height: 100%; border: none;"></iframe>
+                                <span class="embed-label">STRATEGIC ANALYSIS</span>
+                                <div class="carousel-container" id="mvela-strategy-carousel" style="aspect-ratio: 1/1;">
+                                    <div class="carousel-track">
+                                        <!-- Slide 1: Market Assessment -->
+                                        <div class="carousel-slide">
+                                            <div style="width: 100%; height: 100%; position: relative;">
+                                                <iframe src="assets/mvela-mushrooms/mvela-market-opportunity.pdf"
+                                                    style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe>
+                                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;"
+                                                    onclick="openLightbox(this.previousElementSibling, 'pdf')">
+                                                </div>
+                                            </div>
+                                            <div
+                                                style="text-align: center; margin-top: 12px; position: absolute; bottom: -40px; width: 100%;">
+                                                <a href="assets/mvela-mushrooms/mvela-market-opportunity.pdf"
+                                                    target="_blank" class="btn btn-secondary"
+                                                    style="font-size: 0.75rem; padding: 6px 12px;">Download
+                                                    Assessment</a>
+                                            </div>
+                                        </div>
+                                        <!-- Slide 2: Threat Scan -->
+                                        <div class="carousel-slide">
+                                            <div style="width: 100%; height: 100%; position: relative;">
+                                                <iframe src="assets/mvela-mushrooms/mvela-threat-scan.pdf"
+                                                    style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe>
+                                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;"
+                                                    onclick="openLightbox(this.previousElementSibling, 'pdf')">
+                                                </div>
+                                            </div>
+                                            <div
+                                                style="text-align: center; margin-top: 12px; position: absolute; bottom: -40px; width: 100%;">
+                                                <a href="assets/mvela-mushrooms/mvela-threat-scan.pdf" target="_blank"
+                                                    class="btn btn-secondary"
+                                                    style="font-size: 0.75rem; padding: 6px 12px;">Download Threat
+                                                    Scan</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-btn prev" aria-label="Previous slide">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <polyline points="15 18 9 12 15 6"></polyline>
+                                        </svg>
+                                    </button>
+                                    <button class="carousel-btn next" aria-label="Next slide">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <polyline points="9 18 15 12 9 6"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="carousel-dots">
+                                        <div class="carousel-dot active" data-index="0"></div>
+                                        <div class="carousel-dot" data-index="1"></div>
+                                    </div>
                                 </div>
                                 <div style="text-align: center; margin-top: 12px;">
-                                    <a href="assets/mvela-mushrooms/mvela-market-opportunity.pdf"
-                                        target="_blank" class="btn btn-secondary"
-                                        style="font-size: 0.75rem; padding: 6px 12px;">Download PDF</a>
-                                </div>
-                            </div>
-
-                            <!-- Threat Scan -->
-                            <div class="embed-section" style="margin: 0;">
-                                <span class="embed-label">THREAT SCAN</span>
-                                <div class="supademo-container"
-                                    style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
-                                    <iframe
-                                        src="assets/mvela-mushrooms/mvela-threat-scan.pdf"
-                                        style="width: 100%; height: 100%; border: none;"></iframe>
-                                </div>
-                                <div style="text-align: center; margin-top: 12px;">
-                                    <a href="assets/mvela-mushrooms/mvela-threat-scan.pdf"
-                                        target="_blank" class="btn btn-secondary"
-                                        style="font-size: 0.75rem; padding: 6px 12px;">Download PDF</a>
+                                    <span style="font-size: 0.75rem; color: var(--gray);">Market Assessment & Threat
+                                        Scan</span>
                                 </div>
                             </div>
                         </div>
@@ -2889,6 +2926,7 @@
             initCarousel('robeli-strategy-carousel');
             initCarousel('legacy-branding-carousel');
             initCarousel('legacy-crm-carousel');
+            initCarousel('mvela-strategy-carousel');
         });
     </script>
 </body>
