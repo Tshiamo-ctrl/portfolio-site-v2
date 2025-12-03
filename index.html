@@ -2810,25 +2810,36 @@
         }
 
         // Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px'
+            };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Only animate once
-                }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.case-card, .work-dump-item, .section-title, .hero-content, .about-content, .contact-content, .value-card, .featured-case, .skill-category');
+
+            animatedElements.forEach((el, index) => {
+                el.classList.add('animate-on-scroll', 'fade-up');
+                observer.observe(el);
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.case-card, .work-dump-item, .section-title, .hero-content, .about-content, .contact-content').forEach((el, index) => {
-            el.classList.add('animate-on-scroll', 'fade-up');
-            // Add staggering delay based on index or position if needed, 
-            // but for now simple class addition is enough.
-            observer.observe(el);
+            // Fallback: If observer doesn't trigger (e.g. strict threshold), show elements after a delay
+            setTimeout(() => {
+                animatedElements.forEach(el => {
+                    if (!el.classList.contains('visible')) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 2000);
         });
 
         // Background Animation - "Living Network"
