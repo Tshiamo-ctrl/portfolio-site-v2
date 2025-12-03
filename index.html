@@ -2725,16 +2725,17 @@
             });
         }
 
-        // Background Animation
+        // Background Animation - "Living Network"
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
 
         // Configuration
-        const particleCount = 60; // Number of particles
-        const connectionDistance = 150; // Distance to connect particles
-        const mouseDistance = 200; // Distance for mouse interaction
+        const particleCount = 80; // Increased density
+        const connectionDistance = 180; // Longer connections
+        const mouseDistance = 250; // Larger interaction radius
+        const baseSpeed = 0.3;
 
         // Mouse position
         let mouse = { x: null, y: null };
@@ -2763,41 +2764,54 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5; // Velocity X
-                this.vy = (Math.random() - 0.5) * 0.5; // Velocity Y
-                this.size = Math.random() * 1.5 + 0.5;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.size = Math.random() * 2 + 0.5;
+                this.density = (Math.random() * 30) + 1;
+                this.angle = Math.random() * 360; // For organic movement
+
                 // Randomly assign colors based on palette
-                const colors = ['rgba(184, 184, 184, 0.3)', 'rgba(232, 220, 200, 0.3)']; // Gray and Beige
+                // More beige for "creative spark", gray for "structure"
+                const colors = ['rgba(184, 184, 184, 0.4)', 'rgba(232, 220, 200, 0.5)'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
 
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
+                // Organic Movement (Sine Wave)
+                this.angle += baseSpeed * 0.05;
+                this.x += Math.cos(this.angle) * baseSpeed;
+                this.y += Math.sin(this.angle) * baseSpeed;
 
-                // Bounce off edges
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                // Mouse interaction
+                // Mouse Interaction - Magnetic Swirl
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x;
                     let dy = mouse.y - this.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < mouseDistance) {
+                        // Calculate attraction force
                         const forceDirectionX = dx / distance;
                         const forceDirectionY = dy / distance;
                         const force = (mouseDistance - distance) / mouseDistance;
-                        const directionX = forceDirectionX * force * 0.5;
-                        const directionY = forceDirectionY * force * 0.5;
 
-                        // Gentle push away or pull towards? Let's do a subtle pull for "connection"
-                        // Or push for "disturbance". Let's do push for a ripple effect.
-                        this.vx -= directionX * 0.05;
-                        this.vy -= directionY * 0.05;
+                        // Swirl effect (perpendicular force)
+                        const swirlX = -forceDirectionY * 2;
+                        const swirlY = forceDirectionX * 2;
+
+                        // Attraction + Swirl
+                        const directionX = (forceDirectionX * force * this.density) + swirlX;
+                        const directionY = (forceDirectionY * force * this.density) + swirlY;
+
+                        this.x += directionX * 0.05;
+                        this.y += directionY * 0.05;
                     }
                 }
+
+                // Wrap around screen edges for continuous flow
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
             }
 
             draw() {
@@ -2834,7 +2848,9 @@
 
                     if (distance < connectionDistance) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(184, 184, 184, ${0.1 - distance / connectionDistance * 0.1})`; // Fade out
+                        // Dynamic opacity based on distance
+                        let opacity = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = `rgba(184, 184, 184, ${opacity * 0.15})`; // Subtle gray connections
                         ctx.lineWidth = 1;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
@@ -2842,7 +2858,7 @@
                     }
                 }
 
-                // Draw connection to mouse
+                // Draw connection to mouse (Creative Spark)
                 if (mouse.x != null) {
                     let dx = particles[i].x - mouse.x;
                     let dy = particles[i].y - mouse.y;
@@ -2850,7 +2866,8 @@
 
                     if (distance < mouseDistance) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(232, 220, 200, ${0.15 - distance / mouseDistance * 0.15})`; // Beige accent for mouse
+                        let opacity = 1 - (distance / mouseDistance);
+                        ctx.strokeStyle = `rgba(232, 220, 200, ${opacity * 0.2})`; // Beige spark
                         ctx.lineWidth = 1;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(mouse.x, mouse.y);
