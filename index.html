@@ -889,6 +889,7 @@
             height: 100%;
             background-color: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -897,6 +898,72 @@
             overflow-y: auto;
             /* Allow scrolling */
             padding: 20px;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .animate-on-scroll.fade-up {
+            transform: translate3d(0, 40px, 0);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .delay-100 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-200 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-300 {
+            transition-delay: 0.3s;
+        }
+
+        /* Navbar Glass */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .lightbox.active {
@@ -1398,6 +1465,23 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: calc(var(--spacing-unit) * 3);
             margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .case-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .work-dump-item {
@@ -1930,7 +2014,7 @@
                             demonstrates the breadth of B2B clients managed and results achieved.</p>
                         <!-- EMBED SECTION: AGENCY PORTFOLIO -->
                         <div class="embed-section">
-                            <span class="embed-label">AGENCY PORTFOLIO</span>
+                            <span class="embed-label">VISUAL BRANDING PORTFOLIO</span>
                             <div class="supademo-container"
                                 style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
                                 <iframe src="assets/moose-media/moose-media-portfolio.pdf"
@@ -1990,7 +2074,7 @@
                         <div class="embed-section" style="margin-top: 24px;">
                             <span class="embed-label">SHOPRITE PARTNERSHIP CAMPAIGN BROCHURE</span>
                             <div class="supademo-container"
-                                style="aspect-ratio: 3/4; padding: 0; min-height: auto; overflow: hidden;">
+                                style="aspect-ratio: 1/1; padding: 0; min-height: auto; overflow: hidden;">
                                 <iframe src="assets/skotial/skotial-shoprite-brochure.pdf"
                                     style="width: 100%; height: 100%; border: none;"></iframe>
                             </div>
@@ -2724,6 +2808,28 @@
                 imageObserver.observe(img);
             });
         }
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.case-card, .work-dump-item, .section-title, .hero-content, .about-content, .contact-content').forEach((el, index) => {
+            el.classList.add('animate-on-scroll', 'fade-up');
+            // Add staggering delay based on index or position if needed, 
+            // but for now simple class addition is enough.
+            observer.observe(el);
+        });
 
         // Background Animation - "Living Network"
         const canvas = document.getElementById('bg-canvas');
