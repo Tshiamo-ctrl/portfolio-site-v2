@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | Tshiamo Milgrand Masuluke</title>
+    <style>
+        /* Reset & Base Styles (Copied from index.html for consistency) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0A0A0A;
+            --card-bg: #1A1A1A;
+            --white: #FFFFFF;
+            --gray: #B8B8B8;
+            --beige: #E8DCC8;
+            --border: #2A2A2A;
+            --spacing-unit: 8px;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: var(--spacing-unit);
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: calc(var(--spacing-unit) * 4);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--beige);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: var(--spacing-unit);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: calc(var(--spacing-unit) * 3);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        h4 {
+            font-size: 1rem;
+            color: var(--beige);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--gray);
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--gray);
+        }
+
+        li {
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        a {
+            color: var(--beige);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            /* Narrower for resume readability */
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 3);
+        }
+
+        /* Navigation Bar */
+        .resume-nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: calc(var(--spacing-unit) * 2) 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resume-nav .container {
+            padding-top: 0;
+            padding-bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-unit);
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+            text-decoration: none !important;
+        }
+
+        .back-link:hover {
+            color: var(--white);
+        }
+
+        .download-btn {
+            background-color: var(--beige);
+            color: var(--black) !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: var(--transition-smooth);
+        }
+
+        .download-btn:hover {
+            background-color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Resume Header Content */
+        .resume-header {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .resume-header .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 2);
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Sections */
+        .resume-section {
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .job-item {
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: calc(var(--spacing-unit));
+            border-left: 2px solid var(--beige);
+            padding-left: var(--spacing-unit);
+        }
+
+        .company-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .job-duration {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-family: monospace;
+        }
+
+        .job-title {
+            display: block;
+            width: 100%;
+            font-size: 1rem;
+            color: var(--beige);
+            margin-top: 4px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .skill-group h4 {
+            margin-bottom: var(--spacing-unit);
+            color: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+        }
+
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .resume-nav {
+                display: none;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            p,
+            li,
+            a {
+                color: black !important;
+                -webkit-text-fill-color: black !important;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            .job-header {
+                border-left-color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="resume-nav">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                &larr; Back to Portfolio
+            </a>
+            <a href="assets/Resume/Tshiamo Masuluke CV.pdf" class="download-btn" target="_blank" download>
+                Download PDF
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="resume-header">
+            <h1>TSHIAMO MASULUKE</h1>
+            <p style="font-size: 1.25rem; color: var(--beige); margin-bottom: 8px;">B2B &amp; B2C Marketing Strategist |
+                EdTech &amp; HRTech Specialist</p>
+            <div class="contact-info">
+                <span>E: <a href="mailto:tshiamomasuluke@gmail.com"
+                        style="margin-left: 4px;">tshiamomasuluke@gmail.com</a></span>
+                <span>|</span>
+                <span>P: +27 79 075 5471</span>
+                <span>|</span>
+                <span><a href="https://linkedin.com/in/tshiamo-masuluke-595290283" target="_blank">LinkedIn
+                        Profile</a></span>
+                <span>|</span>
+                <span><a href="https://tshiamo-ctrl.github.io/portfolio-site-v2" target="_blank">Portfolio</a></span>
+            </div>
+            <div style="font-size: 0.9rem; color: var(--gray); margin-top: 8px;">
+                Pretoria, Gauteng, South Africa | Immediately available for full-time remote work
+            </div>
+        </header>
+
+        <!-- Professional Summary -->
+        <section class="resume-section">
+            <h2>Professional Summary</h2>
+            <p>
+                B2B and B2C marketing strategist with 4+ years scaling service-based businesses and agencies,
+                specialising in EdTech, HRTech, and B2B SaaS. Proven solo marketer and first marketing hire with
+                experience building marketing infrastructure from zero and leading agencies through growth phases.
+                Hands-on track record across Google Ads and LinkedIn campaigns, WordPress/CRM systems implementation,
+                email automation architecture, and international B2B campaigns.
+            </p>
+            <p>
+                <strong>Unique Differentiator:</strong> Invested 2025 in building a complete EdTech platform—Open edX
+                LMS, Horilla HRMS, and an AI-powered recruitment ecosystem—as a comprehensive learning project to
+                understand learning and HR technology products from the inside. This practical experience with learning
+                technologies, multi-product marketing strategy, and SaaS architecture enables technical authority and
+                authentic customer insight that most marketers lack.
+            </p>
+            <p>
+                Seeking a full-time Marketing Strategist role where deep EdTech/HRTech product knowledge, analytical
+                rigour (Python, Excel modelling), and full-funnel marketing execution combine to drive sustainable
+                pipeline growth. Fully committed to focusing exclusively on an established company’s marketing
+                operations.
+            </p>
+        </section>
+
+        <!-- Core Competencies -->
+        <section class="resume-section">
+            <h2>Core Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h4>Marketing Execution</h4>
+                    <ul class="skill-list">
+                        <li class="skill-tag">Google Ads</li>
+                        <li class="skill-tag">LinkedIn Strategy</li>
+                        <li class="skill-tag">CRM Integration</li>
+                        <li class="skill-tag">SEO Optimization</li>
+                        <li class="skill-tag">Email Automation</li>
+                        <li class="skill-tag">Conversion Rate Optimization</li>
+                        <li class="skill-tag">Google Analytics</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Technical &amp; Systems</h4>
+                    <ul class="skill-list">
+                        <li class="skill-tag">n8n Workflows</li>
+                        <li class="skill-tag">Python Analysis</li>
+                        <li class="skill-tag">Excel Modelling</li>
+                        <li class="skill-tag">Git</li>
+                        <li class="skill-tag">Open edX LMS</li>
+                        <li class="skill-tag">Horilla HRMS</li>
+                        <li class="skill-tag">SQL</li>
+                        <li class="skill-tag">API Integration</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>AI/ML Expertise</h4>
+                    <ul class="skill-list">
+                        <li class="skill-tag">Model Training</li>
+                        <li class="skill-tag">NLP Training Data</li>
+                        <li class="skill-tag">Quality Assurance</li>
+                        <li class="skill-tag">Advanced Prompting (Claude/Gemini)</li>
+                        <li class="skill-tag">AI Feature Dev</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Leadership &amp; Strategy</h4>
+                    <ul class="skill-list">
+                        <li class="skill-tag">Multi-Product Strategy</li>
+                        <li class="skill-tag">International B2B</li>
+                        <li class="skill-tag">Team Leadership</li>
+                        <li class="skill-tag">Strategic Consulting</li>
+                        <li class="skill-tag">Agency Operations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section class="resume-section">
+            <h2>Professional Experience</h2>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <div class="company-name">ROBELI INSTITUTE</div>
+                        <span class="job-title">Marketing &amp; Product Strategy Lead (Learning Project)</span>
+                    </div>
+                    <div class="job-duration">January 2025 - Present</div>
+                </div>
+                <p>
+                    Built a comprehensive EdTech and HRTech platform as a year-long learning project to deeply
+                    understand learning technologies, recruitment systems, and B2B SaaS products from a product and
+                    marketing perspective. Developed a complete go-to-market strategy across multiple revenue models and
+                    customer segments.
+                </p>
+                <h4>Platform Development &amp; Technical Implementation:</h4>
+                <ul>
+                    <li>Deployed Open edX LMS with course creation, enrollment, progress tracking, and certification
+                        workflows.</li>
+                    <li>Integrated Horilla HRMS for employee/learner profile management, performance tracking, skill
+                        inventory, and career development planning.</li>
+                    <li>Built an AI-powered recruitment ecosystem that recycles candidates instead of rejecting them,
+                        supporting candidates with personalised learning paths when they do not initially meet job
+                        specifications.</li>
+                    <li>Developed AI features, including a skill gap analysis engine, behaviour tracking logic, and
+                        personalised learning path recommendations.</li>
+                    <li>Architected the technical stack with attention to hosting costs, server resource allocation,
+                        database optimisation, and security considerations.</li>
+                </ul>
+                <h4>Go-to-Market Strategy &amp; Positioning:</h4>
+                <ul>
+                    <li>Defined multi-product marketing strategy for three business lines: custom learning solutions
+                        (B2B), AI training programs (B2C + B2B), and SaaS platform (B2B subscription).</li>
+                    <li>Structured SaaS pricing, licensing scenarios, and B2C offerings with supporting sales
+                        collateral, buyer personas, and decision-maker targeting strategies.</li>
+                    <li>Built an Excel-based competitive intelligence model analysing the South African EdTech landscape
+                        with structured market segmentation and sizing logic.</li>
+                </ul>
+                <h4>Organic Growth Strategy Execution:</h4>
+                <ul>
+                    <li>Launched founder-led LinkedIn brand presence from zero, using thought-leadership content focused
+                        on industry pain points and implementation challenges.</li>
+                    <li>Prioritised organic visibility and nurturing (content, conversations, and demos) ahead of heavy
+                        paid acquisition, positioning paid media as an accelerator rather than the core engine.</li>
+                </ul>
+                <p><em>Technologies: Open edX | Horilla HRMS | Python | WordPress | PostgreSQL | Git | LinkedIn |
+                        Excel</em></p>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <div class="company-name">SKOTIAL</div>
+                        <span class="job-title">Marketing Lead (Solo Marketing Department)</span>
+                    </div>
+                    <div class="job-duration">February 2021 - January 2022</div>
+                </div>
+                <p>
+                    Served as the sole consistent member of the marketing function for a cryptocurrency-powered social
+                    platform with an integrated e-store, managing digital strategy, paid advertising, brand positioning,
+                    and multi-channel execution.
+                </p>
+                <h4>Platform &amp; Product Marketing:</h4>
+                <ul>
+                    <li>Led complete marketing function for a complex product offering (social platform + cryptocurrency
+                        + e-commerce ecosystem).</li>
+                    <li>Coordinated a co-branding partnership framework for a coupon distribution system, enabling users
+                        to unlock discounts on platform purchases.</li>
+                    <li>Simplified messaging around a technically complex product into clear use-cases and
+                        benefit-driven narratives.</li>
+                </ul>
+                <h4>Paid Advertising &amp; Lead Generation:</h4>
+                <ul>
+                    <li>Managed Google Ads strategy and execution across search and display for user acquisition and
+                        merchant onboarding.</li>
+                    <li>Worked primarily with moderate budgets (typically in the R5,000-R15,000 per month range per
+                        initiative), focusing on highly structured campaigns and tight feedback loops.</li>
+                    <li>Emphasised conversion efficiency by combining modest ad spend with strong landing page clarity,
+                        clear value propositions, and organic content support.</li>
+                </ul>
+                <p><em>Technologies: Google Ads | Social media platforms | Email marketing | Adobe Creative Suite |
+                        Cryptocurrency payment systems</em></p>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <div class="company-name">MOOSE MEDIA</div>
+                        <span class="job-title">Co-Founder &amp; Marketing Director</span>
+                    </div>
+                    <div class="job-duration">March 2020 - January 2024</div>
+                </div>
+                <p>
+                    Built a boutique marketing agency from a solo founder to a small distributed team, serving B2B and
+                    B2C clients across consulting, professional services, training, and niche sectors. Responsible for
+                    strategy, execution, analytics setup, and client relationship management.
+                </p>
+                <h4>Solo Founder to Team Leadership:</h4>
+                <ul>
+                    <li>Founded the agency as the only marketer, handling full-funnel strategy, implementation, and
+                        reporting across multiple accounts.</li>
+                    <li>Gradually built team infrastructure and operational processes, recruiting and coordinating
+                        marketers, designers, content creators, and specialist contractors.</li>
+                    <li>Demonstrated the ability to operate as both a hands-on execution resource and a strategic lead.
+                    </li>
+                </ul>
+                <h4>Paid Advertising Management:</h4>
+                <ul>
+                    <li>Executed Google Ads and paid social campaigns for clients with moderate monthly budgets
+                        (commonly R5,000-R15,000 per client), calibrating spend to business size and risk tolerance.
+                    </li>
+                    <li>Focused heavily on improving lead quality and conversion rates through better offer design,
+                        landing page clarity, and nurture sequences, rather than relying solely on higher spend.</li>
+                    <li>Used combined organic content, email nurturing, and sales enablement assets to increase the
+                        proportion of leads that converted from modest ad budgets.</li>
+                </ul>
+                <p><em>Technologies: Google Ads | Facebook Ads Manager | Google Analytics | CRM systems | Adobe Creative
+                        Suite</em></p>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <div class="company-name">LEGACY BUILDERS (Contract)</div>
+                        <span class="job-title">Marketing &amp; CRM Infrastructure Consultant</span>
+                    </div>
+                    <div class="job-duration">2024</div>
+                </div>
+                <p>
+                    Architected a complete lead-generation and nurturing infrastructure for a B2C financial services
+                    client, migrating from an MVP stack to a scalable WordPress + Jetpack CRM + email automation
+                    platform.
+                </p>
+                <ul>
+                    <li>Designed and implemented WordPress forms integrated with Jetpack CRM for automatic contact
+                        creation, segmentation, and lifecycle tracking.</li>
+                    <li>Built multi-touch email nurture sequences triggered by form submissions and user behaviour.</li>
+                    <li>Executed a zero-data-loss migration from a React/Formspree MVP to WordPress/Jetpack CRM.</li>
+                    <li>Documented the system and delivered live walkthrough training, enabling non-technical staff to
+                        manage content and leads independently.</li>
+                </ul>
+                <p><em>Technologies: WordPress | Jetpack CRM | Yoast SEO | React | Formspree | YouTube API</em></p>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <div class="company-name">LIFEWAY CHURCH (Consultant)</div>
+                        <span class="job-title">Marketing Automation Consultant</span>
+                    </div>
+                    <div class="job-duration">2025</div>
+                </div>
+                <p>
+                    Designed a revenue recovery and content protection strategy for a faith-based organisation facing
+                    income loss from unauthorised digital content distribution.
+                </p>
+                <ul>
+                    <li>Developed a three-phase solution framework: volunteer-based implementation, semi-automated
+                        workflow, and fully automated n8n system.</li>
+                    <li>Designed and deployed an n8n workflow automation for content monitoring, rights management
+                        tracking, and recovery process orchestration.</li>
+                </ul>
+                <p><em>Technologies: n8n | Git | Python | YouTube API | Facebook Graph API</em></p>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <div class="company-name">AM DIGITAL MARKETING (Contract)</div>
+                        <span class="job-title">Brand Specialist</span>
+                    </div>
+                    <div class="job-duration">October 2023 - January 2024</div>
+                </div>
+                <p>
+                    Led international B2B brand development and digital campaign execution for a European digital
+                    marketing agency serving Brazilian and European markets.
+                </p>
+                <ul>
+                    <li>Developed and executed brand-building campaigns targeting European and Brazilian professional
+                        audiences.</li>
+                    <li>Localized messaging and visuals for different markets while preserving brand consistency.</li>
+                </ul>
+            </div>
+
+            <div class="job-item">
+                <div class="job-header">
+                    <div>
+                        <div class="company-name">AI/ML TRAINING &amp; QA</div>
+                        <span class="job-title">Multiple Contract Roles</span>
+                    </div>
+                    <div class="job-duration">2024 - 2025</div>
+                </div>
+                <p>
+                    Completed multiple contract engagements focused on AI model training, data annotation, and quality
+                    assurance, building a practical understanding of AI capabilities, limitations, and costs.
+                </p>
+                <ul>
+                    <li><strong>Mindrift (July 2024 - April 2025):</strong> Annotations Expert</li>
+                    <li><strong>Outlier AI (Dec 2024 - Feb 2025):</strong> AI Training Quality Assurance</li>
+                    <li><strong>Outlier AI (Feb 2024 - Sept 2024):</strong> Freelance Writing Consultant</li>
+                    <li><strong>OpenAI (Jan 2024 - May 2024):</strong> Beta Tester</li>
+                </ul>
+                <p>
+                    <strong>Professional Development Value:</strong> Gained practitioner-level understanding of AI
+                    training workflows, data quality requirements, and evaluation practices—supporting more credible
+                    marketing of AI-related EdTech and HRTech products.
+                </p>
+            </div>
+        </section>
+
+        <!-- Education & Certifications -->
+        <section class="resume-section">
+            <h2>Education</h2>
+            <div class="job-item" style="margin-bottom: var(--spacing-unit);">
+                <div class="job-header" style="margin-bottom: 4px; border: none; padding: 0;">
+                    <div>
+                        <div class="company-name">University of Cape Town</div>
+                        <span class="job-title">Politics, Philosophy, and Economics (PPE) Studies</span>
+                    </div>
+                    <div class="job-duration">2019 - 2021</div>
+                </div>
+                <p>
+                    Completed 2 years toward Bachelor of Social Science (B.Soc.Sci).<br>
+                    <em>Relevant Coursework: Statistical Analysis, Econometrics, Research Methodology, Quantitative
+                        Analysis, Political Economy.</em>
+                </p>
+            </div>
+        </section>
+
+        <section class="resume-section">
+            <h2>Certifications &amp; Development</h2>
+            <div style="margin-bottom: var(--spacing-unit) * 2;">
+                <h4>Programming &amp; Data Science (2025)</h4>
+                <ul>
+                    <li>Mimo Python Developer Certification</li>
+                    <li>Python Essentials 1 &amp; 2 | Cisco Networking Academy</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Business &amp; Marketing (2024)</h4>
+                <ul>
+                    <li>Google AI Essentials | Google</li>
+                    <li>Business Foundations Specialization | University of Pennsylvania (Coursera) - 94%</li>
+                    <li>Omnichannel Retail Strategy Specialization | University of Pennsylvania (Coursera) - 91.66%</li>
+                    <li>Adobe Content Creator Professional Certificate - 92.76%</li>
+                    <li>Introduction to Social Media Marketing | Meta</li>
+                </ul>
+            </div>
+            <p style="margin-top: 16px;">
+                <em>Note: 2025 was a dedicated learning year focused on deepening technical and strategic marketing
+                    capabilities through hands-on project work, programming certifications, and AI expertise
+                    development.</em>
+            </p>
+        </section>
+
+        <!-- Languages -->
+        <section class="resume-section">
+            <h2>Languages</h2>
+            <p>
+                <strong>Native:</strong> English, Tsonga, Tswana<br>
+                <strong>Professional Working:</strong> Sotho, Afrikaans, Zulu, Xhosa
+            </p>
+        </section>
+
+    </div>
+
+</body>
+
+</html>
