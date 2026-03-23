@@ -21,6 +21,10 @@
             --white: #FFFFFF;
             --gray: #B8B8B8;
             --beige: #E8DCC8;
+            --accent: #E8DCC8;
+            /* elegant neutral accent */
+            --gradient-primary: linear-gradient(135deg, #E8DCC8 0%, #B8B8B8 100%);
+            --gradient-secondary: linear-gradient(120deg, #FFFFFF 0%, #E8DCC8 100%);
             --border: #2A2A2A;
             --spacing-unit: 8px;
             --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -46,11 +50,28 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
-            opacity: 0.6;
+            background: radial-gradient(circle at 20% 30%, rgba(232, 220, 200, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(232, 220, 200, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 80%);
+            animation: bgDrift 18s ease-in-out infinite alternate;
             pointer-events: none;
+        }
+
+        @keyframes bgDrift {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.1) translate(2vw, -3vh);
+            }
+
+            100% {
+                transform: scale(1.05) translate(-2vw, 3vh);
+            }
         }
 
         /* Typography */
@@ -145,6 +166,9 @@
             font-size: 0.9375rem;
             position: relative;
             transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
         }
 
         nav a:hover,
@@ -170,21 +194,44 @@
 
         .resume-btn {
             padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
-            background-color: transparent;
+            background: transparent;
             border: 1px solid var(--beige);
             color: var(--beige);
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 0.9375rem;
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .resume-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease-in-out;
+            opacity: 0.9;
+        }
+
+        .resume-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .resume-btn:hover {
-            background-color: var(--beige);
             color: var(--black);
+            border-color: transparent;
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(232, 220, 200, 0.3);
+            box-shadow: 0 8px 20px rgba(232, 220, 200, 0.3);
         }
 
         /* Mobile Menu */
@@ -302,10 +349,11 @@
 
         .hero h1 {
             margin-bottom: calc(var(--spacing-unit) * 3);
-            background: linear-gradient(135deg, var(--white) 0%, var(--gray) 100%);
+            background: var(--gradient-secondary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            filter: drop-shadow(0px 4px 12px rgba(232, 220, 200, 0.15));
         }
 
         .hero-subheading {
@@ -347,15 +395,17 @@
         }
 
         .btn-primary {
-            background-color: var(--beige);
+            background: var(--gradient-primary);
             color: var(--black);
             font-weight: 600;
+            border: none;
         }
 
         .btn-primary:hover {
-            background-color: var(--white);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(232, 220, 200, 0.4);
+            background: var(--gradient-primary);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(232, 220, 200, 0.3);
+            color: var(--black);
         }
 
         .btn-secondary {
@@ -442,9 +492,10 @@
         }
 
         .value-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--beige);
-            box-shadow: 0 12px 30px rgba(232, 220, 200, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(232, 220, 200, 0.3);
+            box-shadow: 0 15px 35px rgba(232, 220, 200, 0.1);
+            background: rgba(30, 30, 30, 0.6);
         }
 
         .value-card h3 {
@@ -575,9 +626,10 @@
         }
 
         .case-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--beige);
-            box-shadow: 0 12px 30px rgba(232, 220, 200, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(232, 220, 200, 0.3);
+            box-shadow: 0 15px 35px rgba(232, 220, 200, 0.1);
+            background: rgba(30, 30, 30, 0.6);
         }
 
         .case-card h4 {
@@ -661,19 +713,22 @@
 
         .skill-tag {
             padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
+            background: rgba(30, 30, 30, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             font-size: 0.9375rem;
             color: var(--white);
             transition: var(--transition-smooth);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .skill-tag:hover {
-            border-color: var(--beige);
-            background-color: rgba(232, 220, 200, 0.1);
+            border-color: rgba(232, 220, 200, 0.4);
+            background: rgba(232, 220, 200, 0.05);
             color: var(--beige);
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(232, 220, 200, 0.15);
         }
 
         /* About Section */
@@ -749,8 +804,8 @@
             background: rgba(30, 30, 30, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
             border-radius: 16px;
             padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 4);
             text-align: center;
@@ -1055,14 +1110,13 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: calc(var(--spacing-unit) * 4);
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: calc(var(--spacing-unit) * 8);
             align-items: center;
         }
 
         .hero-content {
             text-align: left;
-            /* Left align text */
             position: relative;
             z-index: 2;
         }
@@ -1070,27 +1124,75 @@
         .hero-image-container {
             position: relative;
             width: 100%;
-            max-width: 320px;
-            /* Reduced size */
+            max-width: 480px;
             aspect-ratio: 4/5;
             margin-left: auto;
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            border: 2px solid var(--beige);
-            box-shadow: 0 20px 40px rgba(232, 220, 200, 0.1);
-            /* Removed rotation */
+            border: 1px solid rgba(232, 220, 200, 0.2);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(232, 220, 200, 0.15);
             transition: var(--transition-smooth);
+            z-index: 10;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background-image: url('assets/images/profile/hero-pic.jpg?v=2');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            -webkit-mask-image: radial-gradient(circle 500px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 500px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hero-image-container:hover::before {
+            opacity: 1;
+            transition: opacity 0.1s ease;
+        }
+
+        .hero-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(232, 220, 200, 0.1);
+            pointer-events: none;
+            z-index: 3;
         }
 
         .hero-image-container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 30px 60px rgba(232, 220, 200, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8), 0 0 80px rgba(232, 220, 200, 0.25);
+            border-color: rgba(232, 220, 200, 0.4);
         }
 
         .hero-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
+            filter: grayscale(100%) brightness(0.85) contrast(1.05);
+            /* Lighter B&W base */
+            transition: filter 0.4s ease, opacity 0.4s ease;
+            position: relative;
+            z-index: 1;
+            opacity: 0.8;
+            /* Let background show through */
+        }
+
+        .hero-image-container:hover img {
+            filter: grayscale(100%) brightness(0.7) contrast(1.1);
+            /* Darken slightly to make spotlight pop */
+            opacity: 0.7;
+            /* Becomes more transparent on hover so colored spotlight takes over */
         }
 
         .hero-tagline {
@@ -1670,8 +1772,8 @@
                             <span><strong>Architected</strong> integrated LMS, HRMS, &amp; AI platforms. I don't just
                                 market
                                 complexity; I've lived it.</span>
-                            <span><strong>Scaled</strong> a solo agency to a 15-person team, training AI models and
-                                deploying infrastructure along the way.</span>
+                            <span><strong>Scaled</strong> a solo agency to a 15-person team. <strong>Trained</strong>
+                                specialised AI models at OpenAI, Fleet AI, and Alligner.</span>
                             <span><strong>Led</strong> high-impact B2B &amp; B2C campaigns across European and Brazilian
                                 markets.</span>
                         </div>
@@ -1682,7 +1784,7 @@
                         </div>
                     </div>
                     <div class="hero-image-container">
-                        <img src="assets/images/profile/me.jpg" alt="Tshiamo Milgrand Masuluke">
+                        <img src="assets/images/profile/hero-pic.jpg?v=2" alt="Tshiamo Milgrand Masuluke">
                     </div>
                 </div>
             </div>
@@ -1706,7 +1808,8 @@
                     </div>
                     <div class="value-card">
                         <h3>Technical + Marketing</h3>
-                        <p>Trained AI models at OpenAI. Deployed cloud infrastructure. Executed marketing campaigns. I
+                        <p>Production Labeller at Alligner training frontier coding models, and AI Specialist Contractor
+                            at Fleet AI training specialised AI agents. Trained AI models at OpenAI. I
                             bridge the gap between
                             technical engineering and market positioning.</p>
                     </div>
@@ -2466,9 +2569,11 @@
         <section id="contact">
             <div class="container">
                 <div class="contact-section">
-                    <h2>Let's Work Together</h2>
-                    <p>Currently seeking full-time Marketing Strategist role in EdTech or B2B SaaS. Ready to start
-                        immediately with exclusive commitment, no side projects or divided attention.</p>
+                    <div class="contact-text">
+                        <h3>Let's Build &amp; Scale Together</h3>
+                        <p>Ready to build, launch, and scale your next EdTech or B2B SaaS product. Let's discuss how we
+                            can drive sustainable growth together.</p>
+                    </div>
                     <div class="contact-cta">
                         <button class="btn btn-primary" onclick="window.open('#', '_blank')">Download Resume</button>
                         <button class="btn btn-secondary"
@@ -2856,7 +2961,7 @@
             }, 2000);
         });
 
-        // Background Animation - "Living Network"
+        // Background Animation - "Fluid Data Streams & Ambient Glow" (IT + Art)
         const canvas = document.getElementById('bg-canvas');
         if (canvas) {
             const ctx = canvas.getContext('2d');
@@ -2864,10 +2969,9 @@
             let particles = [];
 
             // Configuration
-            const particleCount = 80; // Increased density
-            const connectionDistance = 180; // Longer connections
-            const mouseDistance = 250; // Larger interaction radius
-            const baseSpeed = 0.3;
+            const particleCount = 85;
+            const connectionDistance = 200;
+            const mouseDistance = 350;
 
             // Mouse position
             let mouse = { x: null, y: null };
@@ -2882,89 +2986,88 @@
                 mouse.y = null;
             });
 
-            // Resize handling
             function resize() {
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = window.innerHeight;
             }
-
             window.addEventListener('resize', resize);
             resize();
 
-            // Particle Class
             class Particle {
                 constructor() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.baseX = this.x;
-                    this.baseY = this.y;
-                    this.size = Math.random() * 2 + 0.5;
-                    this.density = (Math.random() * 30) + 1;
-                    this.angle = Math.random() * 360; // For organic movement
+                    this.isAmbient = Math.random() > 0.85; // 15% are large ambient accent orbs
+                    this.size = this.isAmbient ? Math.random() * 80 + 50 : Math.random() * 2 + 0.8;
+                    this.vx = (Math.random() - 0.5) * (this.isAmbient ? 0.3 : 0.9);
+                    this.vy = (Math.random() - 0.5) * (this.isAmbient ? 0.3 : 0.9);
 
-                    // Randomly assign colors based on palette
-                    // More beige for "creative spark", gray for "structure"
-                    const colors = ['rgba(184, 184, 184, 0.4)', 'rgba(232, 220, 200, 0.5)'];
+                    // Elegant palette with brighter accents for regular nodes, and soft glows for ambient
+                    const colors = this.isAmbient
+                        ? ['rgba(232, 220, 200, 0.04)', 'rgba(232, 220, 200, 0.06)']
+                        : ['rgba(232, 220, 200, 0.9)', 'rgba(255, 255, 255, 0.5)', 'rgba(184, 184, 184, 0.6)'];
                     this.color = colors[Math.floor(Math.random() * colors.length)];
+
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.spin = (Math.random() - 0.5) * 0.02;
                 }
 
                 update() {
-                    // Organic Movement (Sine Wave)
-                    this.angle += baseSpeed * 0.05;
-                    this.x += Math.cos(this.angle) * baseSpeed;
-                    this.y += Math.sin(this.angle) * baseSpeed;
+                    // Fluid undulating movement (Artistic drift)
+                    this.angle += this.spin;
+                    this.x += this.vx + Math.cos(this.angle) * (this.isAmbient ? 0.2 : 0.7);
+                    this.y += this.vy + Math.sin(this.angle) * (this.isAmbient ? 0.2 : 0.7);
 
-                    // Mouse Interaction - Magnetic Swirl
-                    if (mouse.x != null) {
-                        let dx = mouse.x - this.x;
+                    // Mouse interaction - magnetic attraction and organic swirl
+                    if (mouse.x != null && !this.isAmbient) {
+                        let dx = mouse.x - this.x; // Pull towards mouse
                         let dy = mouse.y - this.y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < mouseDistance) {
+                            let force = (mouseDistance - dist) / mouseDistance;
 
-                        if (distance < mouseDistance) {
-                            // Calculate attraction force
-                            const forceDirectionX = dx / distance;
-                            const forceDirectionY = dy / distance;
-                            const force = (mouseDistance - distance) / mouseDistance;
+                            // Magnetic attraction
+                            this.x += (dx / dist) * force * 1.5;
+                            this.y += (dy / dist) * force * 1.5;
 
-                            // Swirl effect (perpendicular force)
-                            const swirlX = -forceDirectionY * 2;
-                            const swirlY = forceDirectionX * 2;
-
-                            // Attraction + Swirl
-                            const directionX = (forceDirectionX * force * this.density) + swirlX;
-                            const directionY = (forceDirectionY * force * this.density) + swirlY;
-
-                            this.x += directionX * 0.05;
-                            this.y += directionY * 0.05;
+                            // Swirl movement around the cursor
+                            this.x += (dy / dist) * force * 0.6;
+                            this.y -= (dx / dist) * force * 0.6;
                         }
                     }
 
-                    // Wrap around screen edges for continuous flow
-                    if (this.x < 0) this.x = width;
-                    if (this.x > width) this.x = 0;
-                    if (this.y < 0) this.y = height;
-                    if (this.y > height) this.y = 0;
+                    // Wrap around
+                    let margin = this.isAmbient ? 150 : 100;
+                    if (this.x < -margin) this.x = width + margin;
+                    if (this.x > width + margin) this.x = -margin;
+                    if (this.y < -margin) this.y = height + margin;
+                    if (this.y > height + margin) this.y = -margin;
                 }
 
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
+                    if (this.isAmbient) {
+                        // Soft glow effect for ambient orbs
+                        let radGrad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                        radGrad.addColorStop(0, this.color);
+                        radGrad.addColorStop(1, 'transparent');
+                        ctx.fillStyle = radGrad;
+                    } else {
+                        ctx.fillStyle = this.color;
+                    }
                     ctx.fill();
                 }
             }
 
-            // Initialize particles
             function initParticles() {
                 particles = [];
                 for (let i = 0; i < particleCount; i++) {
                     particles.push(new Particle());
                 }
             }
-
             initParticles();
 
-            // Animation Loop
             function animate() {
                 ctx.clearRect(0, 0, width, height);
 
@@ -2972,47 +3075,87 @@
                     particles[i].update();
                     particles[i].draw();
 
-                    // Draw connections
-                    for (let j = i; j < particles.length; j++) {
-                        let dx = particles[i].x - particles[j].x;
-                        let dy = particles[i].y - particles[j].y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
+                    // Draw flowing curved connections (Liquid Data effect)
+                    if (!particles[i].isAmbient) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            if (particles[j].isAmbient) continue; // Don't connect ambient orbs
 
-                        if (distance < connectionDistance) {
-                            ctx.beginPath();
-                            // Dynamic opacity based on distance
-                            let opacity = 1 - (distance / connectionDistance);
-                            ctx.strokeStyle = `rgba(184, 184, 184, ${opacity * 0.15})`; // Subtle gray connections
-                            ctx.lineWidth = 1;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
+                            let dx = particles[i].x - particles[j].x;
+                            let dy = particles[i].y - particles[j].y;
+                            let dist = Math.sqrt(dx * dx + dy * dy);
+
+                            if (dist < connectionDistance) {
+                                let opacity = 1 - (dist / connectionDistance);
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+
+                                // Calculate a control point to make the line curve organically
+                                let midX = (particles[i].x + particles[j].x) / 2;
+                                let midY = (particles[i].y + particles[j].y) / 2;
+                                let ctrlX = midX + Math.cos(particles[i].angle) * 45;
+                                let ctrlY = midY + Math.sin(particles[j].angle) * 45;
+
+                                ctx.quadraticCurveTo(ctrlX, ctrlY, particles[j].x, particles[j].y);
+
+                                ctx.strokeStyle = `rgba(232, 220, 200, ${opacity * 0.4})`; // Brighter curves
+                                ctx.lineWidth = 1.0;
+                                ctx.stroke();
+                            }
                         }
-                    }
 
-                    // Draw connection to mouse (Creative Spark)
-                    if (mouse.x != null) {
-                        let dx = particles[i].x - mouse.x;
-                        let dy = particles[i].y - mouse.y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        // Interactive dynamic connections to the user's cursor
+                        if (mouse.x != null) {
+                            let dx = mouse.x - particles[i].x;
+                            let dy = mouse.y - particles[i].y;
+                            let dist = Math.sqrt(dx * dx + dy * dy);
 
-                        if (distance < mouseDistance) {
-                            ctx.beginPath();
-                            let opacity = 1 - (distance / mouseDistance);
-                            ctx.strokeStyle = `rgba(232, 220, 200, ${opacity * 0.2})`; // Beige spark
-                            ctx.lineWidth = 1;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.stroke();
+                            if (dist < mouseDistance) {
+                                let opacity = 1 - (dist / mouseDistance);
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+
+                                // Dynamic control point for fluid bezier towards mouse
+                                let ctrlX = (particles[i].x + mouse.x) / 2 + Math.cos(particles[i].angle) * 70;
+                                let ctrlY = (particles[i].y + mouse.y) / 2 + Math.sin(particles[i].angle) * 70;
+
+                                ctx.quadraticCurveTo(ctrlX, ctrlY, mouse.x, mouse.y);
+                                ctx.strokeStyle = `rgba(232, 220, 200, ${opacity * 0.9})`; // Highly energetic connection
+                                ctx.lineWidth = 1.2 + opacity * 1.5; // Thicker closer to the mouse
+                                ctx.stroke();
+                            }
                         }
                     }
                 }
+
+                // Draw a core glowing orb exactly at the mouse cursor
+                if (mouse.x != null) {
+                    let mouseGlow = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 100);
+                    mouseGlow.addColorStop(0, 'rgba(232, 220, 200, 0.12)');
+                    mouseGlow.addColorStop(1, 'transparent');
+                    ctx.fillStyle = mouseGlow;
+                    ctx.beginPath();
+                    ctx.arc(mouse.x, mouse.y, 100, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
                 requestAnimationFrame(animate);
             }
-
             animate();
         }
 
+        // Portrait Interactive Overlay Spotlight Effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.hero-image-container');
+            if (container) {
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    container.style.setProperty('--mouse-x', `${x}%`);
+                    container.style.setProperty('--mouse-y', `${y}%`);
+                });
+            }
+        });
         // Carousel Functionality
         function initCarousel(carouselId) {
             const carousel = document.getElementById(carouselId);
